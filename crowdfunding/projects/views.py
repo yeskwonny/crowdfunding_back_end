@@ -23,7 +23,7 @@ class ProjectList(APIView):
     
     # TODO: how can i print request and others?? 
     # TODO: if Response make the data into JSON, what does serializer do? into python dictionary?
-    # TODO: where i can see the Response(status)? When i have ui i can show the error? 
+    # TODO: where i can see the Response(status)? When i can see the error? 
     # TODO:what is difference Response/ HTTP404 When it gives error
 
     def post(self,request):
@@ -31,7 +31,7 @@ class ProjectList(APIView):
         # print("Request Data:", request.data, flush=True)
         if serializer.is_valid():
             # save in the db
-            serializer.save()    
+            serializer.save(owner=request.user)   
             return Response(
                 serializer.data,
                 status=status.HTTP_201_CREATED
