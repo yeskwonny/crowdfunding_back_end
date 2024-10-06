@@ -1,4 +1,3 @@
-
 # Crowdfunding Back End
 
 MakeCine
@@ -40,26 +39,28 @@ They can introduce their films and receive funding from the public.
   - Bad request such as missing field.
 
 ### API Spec
-| URL                    | HTTP METHOD | PURPOSE                 | REQUEST BODY   | SUCCESS RESPONSE CODE | Autnetication/Authorisation                         | 
-|------------------------|-------------|-------------------------|----------------|-----------------------|-----------------------------------------------------| 
-| /projects/             | GET         | Display all projects    | N/A            | 200                   | N/A                                                 | 
-| /projects/:id          | GET         | Return a project by id  | N/A            | 200                   | N/A                                                 | 
-| /projects?is_open=True | GET         | Return projects is open | N/A            | 200                   | N/A                                                 | 
-| /projects/             | POST        | Create a new projects   | Project object | 201                   | Login required                                      | 
-| /projects/:id          | PUT         | Update the prject       | Project object | 200                   | Login required /Must be the project owner or admin  | 
-| /projects/:id          | DELETE      | Delete the project      |                | 200                   | Login required /Must be the project owner or admin  | 
-|                        |             |                         |                |                       |                                                     | 
-| /pledges/              | GET         | Return all pledges      | N/A            | 200                   | N/A                                                 | 
-| /pledges/:id           | GET         | Return a pledge by id   | N/A            | 200                   | N/A                                                 | 
-| /pledges/              | POST        | Create a pledge         | Pledges object | 201                   | Login required                                      | 
-| /pledges/:id           | PUT         | Update a pledge         | Pledges object | 200                   | Login required /Must be the project owner or admin  | 
-| /pledges/:id           | DELETE      | Delete the pledge by id | N/A            | 200                   | Login required /Must be the project owner or admin  | 
-|                        |             |                         |                |                       |                                                     | 
-| /users/                | GET         | Returns all users       | N/A            | 200                   | Login required /Must be the admin                   | 
-| /users/                | POST        | Sign up                 | User object    | 201                   | N/A                                                 | 
-| /users/login           | POST        | Login                   | User object    | 200                   | N/A                                                 | 
-| /users/:id             | PUT         | Update the user by id   | User object    | 200                   | Login required /Must be the project owner or admin  | 
-| /users/:id             | DELETE      | Delete the user by id   | N/A            | 200                   | Login required /Must be the project owner or admin  | 
+
+| URL                    | HTTP METHOD | PURPOSE                 | REQUEST BODY   | SUCCESS RESPONSE CODE | Autnetication/Authorisation                        |
+| ---------------------- | ----------- | ----------------------- | -------------- | --------------------- | -------------------------------------------------- |
+| /projects/             | GET         | Display all projects    | N/A            | 200                   | N/A                                                |
+| /projects/:id          | GET         | Return a project by id  | N/A            | 200                   | N/A                                                |
+| /projects?is_open=True | GET         | Return projects is open | N/A            | 200                   | N/A                                                |
+| /projects/             | POST        | Create a new projects   | Project object | 201                   | Login required                                     |
+| /projects/:id          | PUT         | Update the prject       | Project object | 200                   | Login required /Must be the project owner or admin |
+| /projects/:id          | DELETE      | Delete the project      |                | 200                   | Login required /Must be the project owner or admin |
+|                        |             |                         |                |                       |                                                    |
+| /pledges/              | GET         | Return all pledges      | N/A            | 200                   | N/A                                                |
+| /pledges/:id           | GET         | Return a pledge by id   | N/A            | 200                   | N/A                                                |
+| /pledges/              | POST        | Create a pledge         | Pledges object | 201                   | Login required                                     |
+| /pledges/:id           | PUT         | Update a pledge         | Pledges object | 200                   | Login required /Must be the project owner or admin |
+| /pledges/:id           | DELETE      | Delete the pledge by id | N/A            | 200                   | Login required /Must be the project owner or admin |
+|                        |             |                         |                |                       |                                                    |
+| /users/                | GET         | Returns all users       | N/A            | 200                   | Login required /Must be the admin                  |
+| /users/                | POST        | Sign up                 | User object    | 201                   | N/A                                                |
+| /users/login           | POST        | Login                   | User object    | 200                   | N/A                                                |
+| /users/:id             | PUT         | Update the user by id   | User object    | 200                   | Login required /Must be the project owner or admin |
+| /users/:id             | DELETE      | Delete the user by id   | N/A            | 200                   | Login required /Must be the project owner or admin |
+
 ### DB Schema
 
-![]( {{ ./relative/path/to/your/schema/image.png }} )
+![alt text](db_schema.png)
