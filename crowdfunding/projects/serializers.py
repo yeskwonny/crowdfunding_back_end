@@ -4,17 +4,32 @@ from django.apps import apps
 class ProjectSerializer(serializers.ModelSerializer):
     # loggin user is owner of this project
     owner = serializers.ReadOnlyField(source='owner.id')
+    
     class Meta:
         model = apps.get_model('projects.Project')
         fields = '__all__'
 
 
 class PledgeSerializer(serializers.ModelSerializer):
-     # loggin user is owner of this pledge
-    owner = serializers.ReadOnlyField(source='owner.id')
+    # loggin user is owner of this pledge
+    supporter = serializers.ReadOnlyField(source='supporter.id')
     class Meta:
         model=apps.get_model('projects.Pledge')
         fields = '__all__'
+
+
+class PledgeDetailSerializer(PledgeSerializer):
+    
+    projects=ProjectSerializer(many=True, read_only=True)
+    def update(self, instance, validated_data):
+        instance.amount = validated_data.get('amount', instance.amount)
+        instance.comment = validated_data.get('comment', instance.comment)
+        instance.anonymous = validated_data.get('anonymous', instance.anonymous)
+        instance.project = validated_data.get('project', instance.project)
+        instance.supporter = validated_data.get('supporter', instance.supporter)
+        instance.save()
+        return instance
+
 
 # Add pledge in the prject model
 class ProjectDetailSerializer(ProjectSerializer):
