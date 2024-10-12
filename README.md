@@ -9,16 +9,24 @@ MakeCine
 This is a platform for independent movie directors.
 They can introduce their films and receive funding from the public.
 
-### Intended Audience/User Stories
+### Intended Audience
 
 - Movie directors or staff
 - Movie fans who loves independent movies
 - Investors
 
+### User Story
+
+- As a movie director/staff, I want to promote my new movie and gather funding from people who are passionate about supporting independent films so that I can bring my vision to life.
+
+- As a movie fan, I want to find cool, unique movies that may not be well-known and support them financially, so I can help these projects succeed and enjoy exclusive content or rewards.
+
+- As a movie investor, I want to discover promising and original movie projects that stand out from mainstream productions, so I can invest in creative ventures with the potential for growth and financial return.
+
 ### Front End Pages/Functionality
 
 - Homepage
-  1. nav bar
+  1. Nav bar
   - Sign up/ login button on the nav bar.
   - Create projects button.
   2. Landing page
@@ -47,19 +55,20 @@ They can introduce their films and receive funding from the public.
 | /projects?is_open=True | GET         | Return projects is open | N/A            | 200                   | N/A                                                |
 | /projects/             | POST        | Create a new projects   | Project object | 201                   | Login required                                     |
 | /projects/:id          | PUT         | Update the prject       | Project object | 200                   | Login required /Must be the project owner or admin |
-| /projects/:id          | DELETE      | Delete the project      |                | 200                   | Login required /Must be the project owner or admin |
+| /projects/:id          | DELETE      | Delete the project      | N/A            | 200                   | Login required /Must be the project owner or admin |
 |                        |             |                         |                |                       |                                                    |
-| /pledges/              | GET         | Return all pledges      | N/A            | 200                   | N/A                                                |
+| /pledges/              | GET         | Return all pledges      | N/A            | 200                   | Only Admin                                         |
 | /pledges/:id           | GET         | Return a pledge by id   | N/A            | 200                   | N/A                                                |
 | /pledges/              | POST        | Create a pledge         | Pledges object | 201                   | Login required                                     |
 | /pledges/:id           | PUT         | Update a pledge         | Pledges object | 200                   | Login required /Must be the project owner or admin |
 | /pledges/:id           | DELETE      | Delete the pledge by id | N/A            | 200                   | Login required /Must be the project owner or admin |
 |                        |             |                         |                |                       |                                                    |
-| /users/                | GET         | Returns all users       | N/A            | 200                   | Login required /Must be the admin                  |
+| /users/                | GET         | Returns all users       | N/A            | 200                   | Only Admin                                         |
+| /users/:id             | GET         | Return a user by id     | N/A            | 200                   | Login required /useritself or admin                |
 | /users/                | POST        | Sign up                 | User object    | 201                   | N/A                                                |
 | /users/login           | POST        | Login                   | User object    | 200                   | N/A                                                |
-| /users/:id             | PUT         | Update the user by id   | User object    | 200                   | Login required /Must be the project owner or admin |
-| /users/:id             | DELETE      | Delete the user by id   | N/A            | 200                   | Login required /Must be the project owner or admin |
+| /users/:id             | PUT         | Update the user by id   | User object    | 200                   | Login required /useritself                         |
+| /users/:id             | DELETE      | Delete the user by id   | N/A            | 200                   | Login required /useritself or admin                |
 
 ### DB Schema
 
