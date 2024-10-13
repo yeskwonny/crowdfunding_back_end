@@ -55,20 +55,20 @@ They can introduce their films and receive funding from the public.
 | /projects?is_open=True | GET         | Return projects is open | N/A            | 200                   | N/A                                                |
 | /projects/             | POST        | Create a new projects   | Project object | 201                   | Login required                                     |
 | /projects/:id          | PUT         | Update the prject       | Project object | 200                   | Login required /Must be the project owner or admin |
-| /projects/:id          | DELETE      | Delete the project      | N/A            | 200                   | Login required /Must be the project owner or admin |
+| /projects/:id          | DELETE      | Delete the project      | N/A            | 204                   | Login required /Must be the project owner or admin |
 |                        |             |                         |                |                       |                                                    |
 | /pledges/              | GET         | Return all pledges      | N/A            | 200                   | Only Admin                                         |
 | /pledges/:id           | GET         | Return a pledge by id   | N/A            | 200                   | N/A                                                |
 | /pledges/              | POST        | Create a pledge         | Pledges object | 201                   | Login required                                     |
 | /pledges/:id           | PUT         | Update a pledge         | Pledges object | 200                   | Login required /Must be the project owner or admin |
-| /pledges/:id           | DELETE      | Delete the pledge by id | N/A            | 200                   | Login required /Must be the project owner or admin |
+| /pledges/:id           | DELETE      | Delete the pledge by id | N/A            | 204                   | Login required /Must be the project owner or admin |
 |                        |             |                         |                |                       |                                                    |
 | /users/                | GET         | Returns all users       | N/A            | 200                   | Only Admin                                         |
 | /users/:id             | GET         | Return a user by id     | N/A            | 200                   | Login required /useritself or admin                |
 | /users/                | POST        | Sign up                 | User object    | 201                   | N/A                                                |
 | /users/login           | POST        | Login                   | User object    | 200                   | N/A                                                |
 | /users/:id             | PUT         | Update the user by id   | User object    | 200                   | Login required /useritself                         |
-| /users/:id             | DELETE      | Delete the user by id   | N/A            | 200                   | Login required /useritself or admin                |
+| /users/:id             | DELETE      | Delete the user by id   | N/A            | 204                   | Login required /useritself or admin                |
 
 ### DB Schema
 
