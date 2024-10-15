@@ -72,4 +72,4 @@ They can introduce their films and receive funding from the public.
 
 ### DB Schema
 
-![db_schema for the project](db_schema.png)
+![db_schema for the project](ERM.png)
