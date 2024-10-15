@@ -9,7 +9,7 @@ from rest_framework import status
 from rest_framework.authtoken.views import ObtainAuthToken
 from rest_framework.authtoken.models import Token
 from rest_framework import permissions
-from projects.permissions import IsOwnerOrReadOnly, IsSupporterOrReadOnly,IsOnlyOwner
+from projects.permissions import IsSelfOrSuperUser
 from .models import CustomUser
 from .serializers import CustomUserSerializer
 
@@ -46,30 +46,27 @@ class CustomUserDetail(APIView):
 # ??? can i make a permission?
     
     permission_classes = [
-        permissions.IsAuthenticated,IsOnlyOwner
+        permissions.IsAuthenticated,IsSelfOrSuperUser
     ]
    
-    def get_object(self, pk):
+    def get_object(self,pk):
         try:
-            return CustomUser.objects.get(pk=pk)
+            user=CustomUser.objects.get(pk=pk)
+            # check the permission for the object by pk
+            self.check_object_permissions(self.request,user)
+            return user
         except CustomUser.DoesNotExist:
             raise Http404
 
     def get(self, request, pk):
         user = self.get_object(pk)
+        print(user)
         serializer = CustomUserSerializer(user)
         return Response(serializer.data)
     
     def put(self,request,pk):
         user = self.get_object(pk)
-        # print(user)
-        # print(request.user)
-        if user.id != request.user.id:
-            return Response(
-            {"detail": "You do not have permission to modify this user."},
-            status=status.HTTP_403_FORBIDDEN
-            )
-        serializer = CustomUserSerializer(instance=user,data=request.data)
+        serializer = CustomUserSerializer(instance=user,data=request.data,partial=True)
         if serializer.is_valid():
             #  save in db 
             serializer.save()
@@ -83,17 +80,8 @@ class CustomUserDetail(APIView):
             )
     def delete(self,request,pk):
         user=self.get_object(pk)
-        if user.id != request.user.id:
-            return Response(
-            {"detail": "You do not have permission to modify this user."},
-            status=status.HTTP_403_FORBIDDEN
-            )
-        
         user.delete()
-        return Response(
-                {"detail": "Your account has been deleted."},
-                status=status.HTTP_204_NO_CONTENT
-                )
+        return Response(status=status.HTTP_204_NO_CONTENT)
     
 
 

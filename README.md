@@ -67,8 +67,8 @@ They can introduce their films and receive funding from the public.
 | /users/:id             | GET         | Return a user by id     | N/A            | 200                   | Login required /useritself or admin                |
 | /users/                | POST        | Sign up                 | User object    | 201                   | N/A                                                |
 | /users/login           | POST        | Login                   | User object    | 200                   | N/A                                                |
-| /users/:id             | PUT         | Update the user by id   | User object    | 200                   | Login required /useritself                         |
-| /users/:id             | DELETE      | Delete the user by id   | N/A            | 204                   | Login required /useritself or admin                |
+| /users/:id             | PUT         | Update the user by id   | User object    | 200                   | Login required /useritself or superuser            |
+| /users/:id             | DELETE      | Delete the user by id   | N/A            | 204                   | Login required /useritself or superuser            |
 
 ### DB Schema
 

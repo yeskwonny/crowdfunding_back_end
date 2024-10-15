@@ -7,7 +7,7 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 # status status.HTTP_200_OK or status.HTTP_404_NOT_FOUND 
 from rest_framework import status,permissions
-from .permissions import IsOwnerOrReadOnly,IsSupporterOrReadOnly
+from .permissions import IsOwnerOrAdminReadOnly,IsSupporterOrAdminReadOnly
 
 
 from django.http import Http404
@@ -42,7 +42,7 @@ class ProjectList(APIView):
 class ProjectDetail(APIView):
     permission_classes = [
         permissions.IsAuthenticatedOrReadOnly,
-        IsOwnerOrReadOnly
+        IsOwnerOrAdminReadOnly
 ]
 
     # what does this do? why do we need this?
@@ -114,7 +114,7 @@ class PledgeList(APIView):
 class PledgeDetail(APIView):
     permission_classes = [
         permissions.IsAuthenticatedOrReadOnly,
-        IsSupporterOrReadOnly
+        IsSupporterOrAdminReadOnly
     ] 
 
     def get_object(self,pk):
@@ -140,8 +140,7 @@ class PledgeDetail(APIView):
             serializer.errors,
             status=status.HTTP_400_BAD_REQUEST
         )   
-    
-    
+      
     def get(self,request,pk): 
         pledge=self.get_object(pk)
         serializer = PledgeSerializer(pledge)
