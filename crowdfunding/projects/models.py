@@ -4,7 +4,9 @@ from django.contrib.auth import get_user_model
 
 class Project(models.Model):
     title = models.CharField(max_length=200)
-    description = models.TextField()
+    director=models.CharField(max_length=200)
+    movie_synopsis = models.TextField()
+    genres=models.CharField(max_length=50)
     goal = models.IntegerField()
     image = models.URLField()
     is_open = models.BooleanField()

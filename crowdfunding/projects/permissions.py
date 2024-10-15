@@ -12,12 +12,8 @@ class IsSupporterOrAdminReadOnly(permissions.BasePermission):
     def has_object_permission(self, request, view, obj):
         if request.method in permissions.SAFE_METHODS:
             return True
-        print(obj.supporter)
-        print(request.user)
         return obj.supporter == request.user or request.user.is_staff
     
 class IsSelfOrSuperUser(permissions.BasePermission):
     def has_object_permission(self, request, view, obj):
-        print(obj.id)
-        print(request.user)
         return obj== request.user or request.user.is_superuser
