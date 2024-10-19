@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib.auth import get_user_model
-from datetime import datetime, timedelta
+from datetime import date
 
 
 class Project(models.Model):
@@ -9,7 +9,7 @@ class Project(models.Model):
     movie_synopsis = models.TextField()
     genres=models.CharField(max_length=50)
     goal = models.IntegerField()
-    goal_deadline= models.DateField()
+    goal_deadline= models.DateTimeField(default=date.today)
     image = models.URLField()
     is_open = models.BooleanField()
     date_created = models.DateTimeField(auto_now_add=True)

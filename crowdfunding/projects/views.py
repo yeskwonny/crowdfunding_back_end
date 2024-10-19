@@ -19,12 +19,23 @@ class ProjectList(APIView):
     permission_classes=[permissions.IsAuthenticatedOrReadOnly]
     def get(self, request):
     #    bring all project data
+        # print(request.GET)
+        # print(request.GET.get("order"))
+        order = request.GET.get("order")
         projects = Project.objects.all()
+        if order is not None:
+            projects = projects.order_by('-' + order)
+        # results = Project.objects.all().order_by('-date_created')
     #  make the data into json
         serializer = ProjectSerializer(projects, many=True)
     # send the response to client 
         return Response(serializer.data)
     
+
+    # get projects by latest
+
+
+
     def post(self,request):
         serializer=ProjectSerializer(data=request.data)
         if serializer.is_valid():
@@ -61,6 +72,7 @@ class ProjectDetail(APIView):
         serializer = ProjectDetailSerializer(project)
         return Response(serializer.data)
     
+  
 
     def put(self, request, pk):
         project = self.get_object(pk)
@@ -96,9 +108,30 @@ class PledgeList(APIView):
         pledges = Pledge.objects.all()
         serializer = PledgeSerializer(pledges, many=True)
         return Response(serializer.data)
+    
 
     def post(self, request):
-        serializer = PledgeSerializer(data=request.data)
+        project_id=request.data.get("project")
+        print(project_id)
+ 
+        # checking the project is not null
+        try:
+            checking_project = Project.objects.get(id=project_id)
+            print(checking_project)
+        except Project.DoesNotExist:
+            return Response(
+            {"error": "Project not found."},
+            status=status.HTTP_404_NOT_FOUND
+        )
+        # checking the project is open or not 
+        if not checking_project.is_open:
+            return Response(
+            {"error": "This project is not open for pledges."},
+            status=status.HTTP_400_BAD_REQUEST
+        )
+
+        serializer = PledgeSerializer(data=request.data)      
+
         if serializer.is_valid():
             serializer.save(supporter=request.user)
             return Response(

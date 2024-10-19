@@ -37,10 +37,12 @@ class ProjectDetailSerializer(ProjectSerializer):
 
     def update(self, instance, validated_data):
         instance.title = validated_data.get('title', instance.title)
-        instance.description = validated_data.get('description', instance.description)
+        instance.movie_synopsis= validated_data.get('movie_synopsis', instance.movie_synopsis)
         instance.goal = validated_data.get('goal', instance.goal)
+        instance.genres=validated_data.get('genres',instance.genres)
         instance.image = validated_data.get('image', instance.image)
         instance.is_open = validated_data.get('is_open', instance.is_open)
+        instance.goal_deadline = validated_data.get('goal_deadline', instance.goal_deadline)
         instance.date_created = validated_data.get('date_created', instance.date_created)
         instance.owner = validated_data.get('owner', instance.owner)
         instance.save()
