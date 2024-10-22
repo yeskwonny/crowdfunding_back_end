@@ -8,7 +8,7 @@ from rest_framework.response import Response
 # status status.HTTP_200_OK or status.HTTP_404_NOT_FOUND 
 from rest_framework import status,permissions
 from .permissions import IsOwnerOrAdminReadOnly,IsSupporterOrAdminReadOnly
-
+from django.db.models import Sum
 
 from django.http import Http404
 from .models import Project, Pledge
@@ -55,9 +55,7 @@ class ProjectDetail(APIView):
         permissions.IsAuthenticatedOrReadOnly,
         IsOwnerOrAdminReadOnly
 ]
-
-    # what does this do? why do we need this?
-    # return the error first when the object doesnt exist?
+    
     def get_object(self,pk):
         try:
             project=Project.objects.get(pk=pk)
@@ -70,12 +68,17 @@ class ProjectDetail(APIView):
         # find the project with the pk    
         project=self.get_object(pk) 
         serializer = ProjectDetailSerializer(project)
+        # total_pledge = project.pledge_total()
+        # print(total_pledge['amount__sum'])
+       
+        # print(pledge_total)
         return Response(serializer.data)
     
-  
+
 
     def put(self, request, pk):
         project = self.get_object(pk)
+        print(request.data)
         serializer = ProjectDetailSerializer(
             instance=project,
             data=request.data,

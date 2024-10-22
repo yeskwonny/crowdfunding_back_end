@@ -31,15 +31,17 @@ class PledgeDetailSerializer(PledgeSerializer):
         return instance
 
 
-# Add pledge in the prject model
+# Add pledge in the project model
 class ProjectDetailSerializer(ProjectSerializer):
     pledges = PledgeSerializer(many=True, read_only=True)
+    total_pledges = serializers.SerializerMethodField()
 
     def update(self, instance, validated_data):
         instance.title = validated_data.get('title', instance.title)
         instance.movie_synopsis= validated_data.get('movie_synopsis', instance.movie_synopsis)
         instance.goal = validated_data.get('goal', instance.goal)
         instance.genres=validated_data.get('genres',instance.genres)
+        instance.director=validated_data.get('director',instance.genres)
         instance.image = validated_data.get('image', instance.image)
         instance.is_open = validated_data.get('is_open', instance.is_open)
         instance.goal_deadline = validated_data.get('goal_deadline', instance.goal_deadline)
@@ -47,3 +49,8 @@ class ProjectDetailSerializer(ProjectSerializer):
         instance.owner = validated_data.get('owner', instance.owner)
         instance.save()
         return instance
+    
+    def get_total_pledges(self,instance):
+       return instance.pledge_total()
+  
+ 
