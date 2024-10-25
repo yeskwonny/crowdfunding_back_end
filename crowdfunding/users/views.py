@@ -48,7 +48,7 @@ class CustomUserDetail(APIView):
     permission_classes = [
         permissions.IsAuthenticated,IsSelfOrSuperUser
     ]
-   
+
     def get_object(self,pk):
         try:
             user=CustomUser.objects.get(pk=pk)
@@ -78,6 +78,7 @@ class CustomUserDetail(APIView):
             serializer.errors, 
             status=status.HTTP_400_BAD_REQUEST
             )
+    
     def delete(self,request,pk):
         user=self.get_object(pk)
         user.delete()
