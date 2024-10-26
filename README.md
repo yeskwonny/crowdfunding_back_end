@@ -70,29 +70,11 @@ They can introduce their films and receive funding from the public.
 | /users/:id             | PUT         | Update the user by id   | User object    | 200                   | Login required /useritself or superuser            |
 | /users/:id             | DELETE      | Delete the user by id   | N/A            | 204                   | Login required /useritself or superuser            |
 
-### Extra features
-
-1. A user is trying to create a pledge when the project is not open
-
-![db_schema for the extra features](images/pledge_only_open.png)
-
-2. The owner of a project is attempting to create a pledge for themselves.
-
-![db_schema for the extra features](images/pledge_for_yourself.png)
-
-3. A user is trying to create a pledge after the project has reached its goal.
-
-![db_schema for the extra features](images/pledge_reach_goal.png)
-
-4. A user is trying to create a pledge that exceeds the remaining goal amount.
-
-![db_schema for the extra features](images/show_remaining_goal.png)
-
 ### DB Schema
 
 ![db_schema for the project](images/ERM.png)
 
-### Screenshots
+### Screenshots - Basic features
 
 1. Get projects by latest
 
@@ -108,7 +90,7 @@ They can introduce their films and receive funding from the public.
 
 4. Update a project
 
-![screenshot for project ](images/get_project_id.png)
+![screenshot for project ](images/update_project.png)
 
 5. Get pledges
 
@@ -139,3 +121,21 @@ They can introduce their films and receive funding from the public.
 
 ![screenshot for auth ](images/authentication.png)
 ![screenshot for auth ](images/authorization.png)
+
+### Screenshots -Extra features
+
+1. A user is trying to create a pledge when the project is not open
+
+![db_schema for the extra features](images/pledge_only_open.png)
+
+2. The owner of a project is attempting to create a pledge for themselves.
+
+![db_schema for the extra features](images/pledge_for_yourself.png)
+
+3. A user is trying to create a pledge after the project has reached its goal.
+
+![db_schema for the extra features](images/pledge_reach_goal.png)
+
+4. A user is trying to create a pledge that exceeds the remaining goal amount.
+
+![db_schema for the extra features](images/show_remaining_goal.png)
