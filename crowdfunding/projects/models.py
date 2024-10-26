@@ -2,7 +2,7 @@ from django.db import models
 from django.contrib.auth import get_user_model
 from datetime import datetime, timedelta,date
 from django.db.models import Sum
-
+# from django.utils import timezone
 
 class Project(models.Model):
     title = models.CharField(max_length=200)
@@ -10,7 +10,8 @@ class Project(models.Model):
     movie_synopsis = models.TextField()
     genres=models.CharField(max_length=100)
     goal = models.IntegerField()
-    goal_deadline= models.DateTimeField(default=date.today)
+    goal_deadline= models.DateTimeField()
+    # goal_deadline= models.DateTimeField(default=datetime.now())
     image = models.URLField()
     is_open = models.BooleanField()
     date_created = models.DateTimeField(auto_now_add=True)

@@ -19,8 +19,7 @@ class ProjectList(APIView):
     permission_classes=[permissions.IsAuthenticatedOrReadOnly]
     def get(self, request):
     #    bring all project data
-        # print(request.GET)
-        # print(request.GET.get("order"))
+        # get projects by latest
         order = request.GET.get("order")
         projects = Project.objects.all()
         if order is not None:
@@ -32,7 +31,6 @@ class ProjectList(APIView):
         return Response(serializer.data)
     
 
-    # get projects by latest
 
 
 
@@ -68,8 +66,6 @@ class ProjectDetail(APIView):
         # find the project with the pk    
         project=self.get_object(pk) 
         serializer = ProjectDetailSerializer(project)
-        # total_pledge = project.pledge_total()
-        # print(total_pledge['amount__sum'])
        
         # print(pledge_total)
         return Response(serializer.data)
@@ -171,11 +167,12 @@ class PledgeDetail(APIView):
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data)
-
+     
         return Response(
             serializer.errors,
             status=status.HTTP_400_BAD_REQUEST
         )   
+    
       
     def get(self,request,pk): 
         pledge=self.get_object(pk)
