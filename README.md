@@ -72,6 +72,22 @@ They can introduce their films and receive funding from the public.
 
 ### Extra features
 
+1. A user is trying to create a pledge when the project is not open
+
+![db_schema for the extra features](images/pledge_only_open.png)
+
+2. The owner of a project is attempting to create a pledge for themselves.
+
+![db_schema for the extra features](images/pledge_for_yourself.png)
+
+3. A user is trying to create a pledge after the project has reached its goal.
+
+![db_schema for the extra features](images/pledge_reach_goal.png)
+
+4. A user is trying to create a pledge that exceeds the remaining goal amount.
+
+![db_schema for the extra features](images/show_remaining_goal.png)
+
 ### DB Schema
 
 ![db_schema for the project](images/ERM.png)
@@ -119,7 +135,7 @@ They can introduce their films and receive funding from the public.
 
 ![screenshot for user ](images/update_user.png)
 
-11. authentication/authorization
+11. Authentication/Authorization
 
 ![screenshot for auth ](images/authentication.png)
 ![screenshot for auth ](images/authorization.png)
