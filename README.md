@@ -70,6 +70,26 @@ They can introduce their films and receive funding from the public.
 | /users/:id             | PUT         | Update the user by id   | User object    | 200                   | Login required /useritself or superuser            |
 | /users/:id             | DELETE      | Delete the user by id   | N/A            | 204                   | Login required /useritself or superuser            |
 
+### Extra features
+
 ### DB Schema
 
-![db_schema for the project](ERM.png)
+![db_schema for the project](images/ERM.png)
+
+### Screenshots
+
+1.Get projects
+
+![screenshot project](images/get_projects.png)
+
+2.Get project by id
+
+![screenshot project ](images/get_project_id.png)
+
+3. Create a project
+
+![screenshot for project ](images/create_project.png)
+
+4. Update a project
+
+![screenshot for project by id](images/get_project_id.png)
