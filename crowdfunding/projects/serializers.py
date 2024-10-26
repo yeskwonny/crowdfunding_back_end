@@ -1,3 +1,4 @@
+
 from rest_framework import serializers
 from django.apps import apps
 
@@ -51,6 +52,6 @@ class ProjectDetailSerializer(ProjectSerializer):
         return instance
     
     def get_total_pledges(self,instance):
-       return instance.pledge_total()
+       return instance.pledge_total
   
  

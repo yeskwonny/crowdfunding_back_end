@@ -29,10 +29,6 @@ class ProjectList(APIView):
         serializer = ProjectSerializer(projects, many=True)
     # send the response to client 
         return Response(serializer.data)
-    
-
-
-
 
     def post(self,request):
         serializer=ProjectSerializer(data=request.data)
@@ -110,24 +106,54 @@ class PledgeList(APIView):
     
 
     def post(self, request):
-        project_id=request.data.get("project")
-        print(project_id)
+        # getting data from request dict
+        project_id=request.data["project"]
+        pledge_owner=request.user.id
+        pledge_amount = request.data.get("amount")
+        
  
         # checking the project is not null
+ 
         try:
+            # bring the project object with id
             checking_project = Project.objects.get(id=project_id)
-            print(checking_project)
+            project_owner=checking_project.owner.id
+           # check if the project.ownwer == pledge.owner
+            if(pledge_owner==project_owner):
+               return Response(
+                {"error": "Sorry, You can not make a pledge for yourself."}, 
+                status=status.HTTP_400_BAD_REQUEST
+                )
+            
         except Project.DoesNotExist:
             return Response(
             {"error": "Project not found."},
             status=status.HTTP_404_NOT_FOUND
         )
+            
         # checking the project is open or not 
         if not checking_project.is_open:
             return Response(
             {"error": "This project is not open for pledges."},
             status=status.HTTP_400_BAD_REQUEST
         )
+      
+        # checking pledge with goal /pledge total
+        total_pledge=checking_project.pledge_total
+        project_goal=checking_project.goal
+        remaining_goal = checking_project.goal - total_pledge
+
+        if total_pledge >= project_goal:
+            return Response(
+            {"error": "This project has already reached its funding goal."},
+            status=status.HTTP_400_BAD_REQUEST
+        )
+
+        if pledge_amount > remaining_goal:
+            return Response(
+                {"error": f"You can only pledge up to ${remaining_goal} to reach the project goal."},
+                status=status.HTTP_400_BAD_REQUEST
+            )
 
         serializer = PledgeSerializer(data=request.data)      
 

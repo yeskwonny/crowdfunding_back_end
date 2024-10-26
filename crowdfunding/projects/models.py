@@ -21,9 +21,16 @@ class Project(models.Model):
         related_name='owned_projects'
     )
     # sum pledge
+   
+    @property
     def pledge_total(self):
-        total = self.pledges.aggregate(Sum('amount'))
-        return total or 0  # If no pledges, return 0
+        total = self.pledges.aggregate(amount_sum=Sum('amount'))['amount_sum']
+        return total or 0 
+    
+    @property
+    def is_goal_reached(self):
+        return self.pledge_total >= self.goal
+       
 
 
 class Pledge(models.Model):
