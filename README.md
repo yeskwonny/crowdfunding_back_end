@@ -78,11 +78,11 @@ They can introduce their films and receive funding from the public.
 
 ### Screenshots
 
-1.Get projects
+1. Get projects by latest
 
 ![screenshot project](images/get_projects.png)
 
-2.Get project by id
+2. Get project by id
 
 ![screenshot project ](images/get_project_id.png)
 
@@ -92,4 +92,34 @@ They can introduce their films and receive funding from the public.
 
 4. Update a project
 
-![screenshot for project by id](images/get_project_id.png)
+![screenshot for project ](images/get_project_id.png)
+
+5. Get pledges
+
+![screenshot for pledge ](images/get_pledges.png)
+
+6. Create a pledge
+
+![screenshot for pledge ](images/create_pledge.png)
+
+7. Update a pledge
+
+![screenshot for pledge ](images/update_pledge.png)
+
+8. Get users
+
+![screenshot for user ](images/get_users.png)
+
+9. Create a user
+
+![screenshot for user ](images/create_user.png)
+![screenshot for user ](images/create_auth_token.png)
+
+10. Update a user
+
+![screenshot for user ](images/update_user.png)
+
+11. authentication/authorization
+
+![screenshot for auth ](images/authentication.png)
+![screenshot for auth ](images/authorization.png)
