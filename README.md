@@ -49,31 +49,63 @@ They can introduce their films and receive funding from the public.
 
 ### API Spec
 
-| URL                    | HTTP METHOD | PURPOSE                 | REQUEST BODY   | SUCCESS RESPONSE CODE | Autnetication/Authorisation                        |
-| ---------------------- | ----------- | ----------------------- | -------------- | --------------------- | -------------------------------------------------- |
-| /projects/             | GET         | Display all projects    | N/A            | 200                   | N/A                                                |
-| /projects/:id          | GET         | Return a project by id  | N/A            | 200                   | N/A                                                |
-| /projects?is_open=True | GET         | Return projects is open | N/A            | 200                   | N/A                                                |
-| /projects/             | POST        | Create a new project    | Project object | 201                   | Login required                                     |
-| /projects/:id          | PUT         | Update the prject       | Project object | 200                   | Login required /Must be the project owner or admin |
-| /projects/:id          | DELETE      | Delete the project      | N/A            | 204                   | Login required /Must be the project owner or admin |
-|                        |             |                         |                |                       |                                                    |
-| /pledges/              | GET         | Return all pledges      | N/A            | 200                   | Only Admin                                         |
-| /pledges/:id           | GET         | Return a pledge by id   | N/A            | 200                   | N/A                                                |
-| /pledges/              | POST        | Create a pledge         | Pledges object | 201                   | Login required                                     |
-| /pledges/:id           | PUT         | Update a pledge         | Pledges object | 200                   | Login required /Must be the project owner or admin |
-| /pledges/:id           | DELETE      | Delete the pledge by id | N/A            | 204                   | Login required /Must be the project owner or admin |
-|                        |             |                         |                |                       |                                                    |
-| /users/                | GET         | Returns all users       | N/A            | 200                   | Only Admin                                         |
-| /users/:id             | GET         | Return a user by id     | N/A            | 200                   | Login required /useritself or admin                |
-| /users/                | POST        | Sign up                 | User object    | 201                   | N/A                                                |
-| /users/login           | POST        | Login                   | User object    | 200                   | N/A                                                |
-| /users/:id             | PUT         | Update the user by id   | User object    | 200                   | Login required /useritself or superuser            |
-| /users/:id             | DELETE      | Delete the user by id   | N/A            | 204                   | Login required /useritself or superuser            |
+| URL                      | HTTP METHOD | PURPOSE                  | REQUEST BODY   | SUCCESS RESPONSE CODE | Autnetication/Authorisation                        |
+| ------------------------ | ----------- | ------------------------ | -------------- | --------------------- | -------------------------------------------------- |
+| /projects/               | GET         | Display all projects     | N/A            | 200                   | N/A                                                |
+| /projects/:id            | GET         | Return a project by id   | N/A            | 200                   | N/A                                                |
+| /projects?status=is_open | GET         | Return projects are open | N/A            | 200                   | N/A                                                |
+| /projects/               | POST        | Create a new project     | Project object | 201                   | Login required                                     |
+| /projects/:id            | PUT         | Update the prject        | Project object | 200                   | Login required /Must be the project owner or admin |
+| /projects/:id            | DELETE      | Delete the project       | N/A            | 204                   | Login required /Must be the project owner or admin |
+|                          |             |                          |                |                       |                                                    |
+| /pledges/                | GET         | Return all pledges       | N/A            | 200                   | Only Admin                                         |
+| /pledges/:id             | GET         | Return a pledge by id    | N/A            | 200                   | N/A                                                |
+| /pledges/                | POST        | Create a pledge          | Pledges object | 201                   | Login required                                     |
+| /pledges/:id             | PUT         | Update a pledge          | Pledges object | 200                   | Login required /Must be the project owner or admin |
+| /pledges/:id             | DELETE      | Delete the pledge by id  | N/A            | 204                   | Login required /Must be the project owner or admin |
+|                          |             |                          |                |                       |                                                    |
+| /users/                  | GET         | Returns all users        | N/A            | 200                   | Only Admin                                         |
+| /users/:id               | GET         | Return a user by id      | N/A            | 200                   | Login required /useritself or admin                |
+| /users/                  | POST        | Sign up                  | User object    | 201                   | N/A                                                |
+| /users/login             | POST        | Login                    | User object    | 200                   | N/A                                                |
+| /users/:id               | PUT         | Update the user by id    | User object    | 200                   | Login required /useritself or superuser            |
+| /users/:id               | DELETE      | Delete the user by id    | N/A            | 204                   | Login required /useritself or superuser            |
 
 ### DB Schema
 
 ![db_schema for the project](images/ERM.png)
+
+### How to register a user
+
+- Endpoint: /users/
+- Method: POST
+###### Request JSON format
+
+```json
+{
+  "password": "1234",
+  "username": "user1"
+}
+```
+
+### How to create a new project
+
+- Endpoint: /projects/
+- Method: POST
+###### Request JSON format
+
+```json
+{
+  "title": "The Great Adventure",
+  "director": "Jane Doe",
+  "movie_synopsis": "A thrilling journey through uncharted lands, where courage and friendship are tested.",
+  "genres": "Adventure",
+  "goal": 50000,
+  "goal_deadline": "2024-12-31",
+  "image": "https://example.com/images/the-great-adventure.jpg",
+  "is_open": true
+}
+```
 
 ### Screenshots - Basic features
 
@@ -141,3 +173,7 @@ They can introduce their films and receive funding from the public.
 4. A user is trying to create a pledge that exceeds the remaining goal amount.
 
 ![db_schema for the extra features](images/show_remaining_goal.png)
+
+```
+
+```
