@@ -19,12 +19,20 @@ class ProjectList(APIView):
     permission_classes=[permissions.IsAuthenticatedOrReadOnly]
     def get(self, request):
     #    bring all project data
-        # get projects by latest
+        # get projects by latest and get params
         order = request.GET.get("order")
+        status=request.GET.get("status")
+        
+        # get all projects
         projects = Project.objects.all()
         if order is not None:
             projects = projects.order_by('-' + order)
         # results = Project.objects.all().order_by('-date_created')
+            
+        # get projects that are open
+        if status is not None:
+            projects=Project.objects.filter(is_open=True)
+        
     #  make the data into json
         serializer = ProjectSerializer(projects, many=True)
     # send the response to client 
