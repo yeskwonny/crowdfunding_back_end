@@ -77,9 +77,10 @@ They can introduce their films and receive funding from the public.
 
 ### Screenshots - Basic features
 
-1. Get projects by latest
+1. Get projects by latest / Get projects that are open
 
 ![screenshot project](images/get_projects.png)
+![screenshot project](images/get_project_is_open.png)
 
 2. Get project by id
 
