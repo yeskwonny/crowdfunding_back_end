@@ -18,28 +18,28 @@ class ProjectList(APIView):
     #readonly for unauthentication user, allow to post for authenticated user
     permission_classes=[permissions.IsAuthenticatedOrReadOnly]
     def get(self, request):
-    # GET 파라미터 가져오기
+    # get parameter 
         order = request.GET.get("order")
         status = request.GET.get("status")
     
-    # 모든 프로젝트 가져오기
+    # bring all project
         projects = Project.objects.all()
         if order is not None:
             projects = projects.order_by('-' + order)
         
-        # 열려 있는 프로젝트 필터링
+        # only is_open
         if status is not None:
             projects = projects.filter(is_open=True)
         
-        # 직렬화 (프로젝트 데이터를 JSON 형식으로 변환)
+        
         serializer = ProjectSerializer(projects, many=True)
         serialized_data = serializer.data  # serializer.data는 리스트 형태
         
-        # pledge_total 추가
+        # add pledge_total 
         for project_data, project_obj in zip(serialized_data, projects):
             project_data["pledge_total"] = project_obj.pledge_total
         
-        # 클라이언트에게 응답 반환
+       
         return Response(serialized_data)
 
     def post(self,request):
