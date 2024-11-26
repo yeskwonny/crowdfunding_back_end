@@ -21,6 +21,7 @@ class ProjectList(APIView):
     # get parameter 
         order = request.GET.get("order")
         status = request.GET.get("status")
+        genre = request.GET.get("genre") 
     
     # bring all project
         projects = Project.objects.all()
@@ -31,6 +32,9 @@ class ProjectList(APIView):
         if status is not None:
             projects = projects.filter(is_open=True)
         
+        # filter by genre
+        if genre is not None:
+            projects = projects.filter(genres__icontains=genre)
         
         serializer = ProjectSerializer(projects, many=True)
         serialized_data = serializer.data  # serializer.data는 리스트 형태
