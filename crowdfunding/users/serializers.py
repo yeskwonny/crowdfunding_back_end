@@ -16,3 +16,13 @@ class CustomUserSerializer(serializers.ModelSerializer):
     def create(self, validated_data):
         # print(validated_data)
         return CustomUser.objects.create_user(**validated_data)
+    
+    def validate_email(self, value):
+        if CustomUser.objects.filter(email=value).exists():
+            raise serializers.ValidationError("This email is already registered.")
+        return value
+
+    def validate_username(self, value):
+        if CustomUser.objects.filter(username=value).exists():
+            raise serializers.ValidationError("This username is already taken.")
+        return value
