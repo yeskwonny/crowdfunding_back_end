@@ -12,7 +12,7 @@ class Project(models.Model):
     goal = models.IntegerField()
     goal_deadline= models.DateTimeField()
     # goal_deadline= models.DateTimeField(default=datetime.now())
-    image = models.URLField()
+    image = models.URLField(blank=True, null=True)
     is_open = models.BooleanField()
     date_created = models.DateTimeField(auto_now_add=True)
     owner=models.ForeignKey(
