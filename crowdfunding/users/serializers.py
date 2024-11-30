@@ -5,7 +5,13 @@ class CustomUserSerializer(serializers.ModelSerializer):
     class Meta:
         model = CustomUser
         fields = '__all__'
-        extra_kwargs = {'password': {'write_only': True}}
+        extra_kwargs = {
+            'username': {'required': True},  
+            'password': {'write_only': True, 'required': True},  
+            'email': {'required': True},  
+            'first_name': {'required': True}, 
+            'last_name': {'required': True},  
+        }
 # password hashing->create user
     def create(self, validated_data):
         # print(validated_data)
