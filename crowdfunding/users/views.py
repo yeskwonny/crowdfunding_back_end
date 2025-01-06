@@ -57,6 +57,8 @@ class CustomUserDetail(APIView):
             return user
         except CustomUser.DoesNotExist:
             raise Http404
+        
+        
 
     def get(self, request, pk):
         user = self.get_object(pk)
@@ -85,6 +87,25 @@ class CustomUserDetail(APIView):
         return Response(status=status.HTTP_204_NO_CONTENT)
     
 
+# getting userinfo with userid
+class CustomUserDetailByID(APIView):
+    def get_object(self,pk):
+        try:
+            user=CustomUser.objects.get(pk=pk)
+            print(user)
+            return user
+        except CustomUser.DoesNotExist:
+            raise Http404
+        
+
+    def get(self, request, pk):
+        user = self.get_object(pk)
+        data = {
+            "id": user.id,
+            "username": user.username,
+           
+        }
+        return Response(data)
 
 class CustomAuthToken(ObtainAuthToken):
     def post(self, request, *args, **kwargs):
@@ -101,3 +122,4 @@ class CustomAuthToken(ObtainAuthToken):
                 'user_id':user.id,
                 'email':user.email
             })
+    
