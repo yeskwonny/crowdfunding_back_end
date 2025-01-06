@@ -14,6 +14,7 @@ class ProjectSerializer(serializers.ModelSerializer):
 class PledgeSerializer(serializers.ModelSerializer):
     # loggin user is owner of this pledge
     supporter = serializers.ReadOnlyField(source='supporter.id')
+    username = serializers.ReadOnlyField(source='supporter.username')
     class Meta:
         model=apps.get_model('projects.Pledge')
         fields = '__all__'

@@ -21,7 +21,6 @@ class Project(models.Model):
         related_name='owned_projects'
     )
     # sum pledge
-   
     @property
     def pledge_total(self):
         total = self.pledges.aggregate(amount_sum=Sum('amount'))['amount_sum']
